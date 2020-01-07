@@ -1,0 +1,26 @@
+<script>
+
+function impairsInf(nombre){
+	var result = 1
+	for(var i=nombre;i>2;i--){
+		if(i%2 == 1){
+			result*=i
+		}
+	}
+	return result
+}
+
+
+function factorielle(nombre){
+	if(nombre>=2){
+		var sousFact=Math.trunc(nombre/2)
+		return impairsInf(nombre)*factorielle(sousFact)*Math.pow(2,sousFact-1)*2
+	}else{
+		return 1
+	}
+}
+
+var test=prompt("Rentrez un nombre")
+console.log("Factorielle de "+test+" est = à "+factorielle(test))
+	
+</script>
