@@ -1,4 +1,3 @@
-  
 pragma solidity ^0.5.12;
 
 
@@ -62,11 +61,11 @@ contract Bazar{
     function recupererObjet(uint indice) public {
         require(Encheres[indice].finEnchere < block.number);
         if(Encheres[indice].meilleurAcheteur == msg.sender){
-            objMag.possesseurs[Encheres[indice].objet] = msg.sender;
+            objMag.accessPoss(indice, msg.sender);
         }
         else if(Encheres[indice].meilleurAcheteur == address(0)){
             require(msg.sender == Encheres[indice].vendeur);
-            objMag.possesseurs[Encheres[indice].objet] = msg.sender;
+            objMag.accessPoss(indice, msg.sender);
         }
     }
 }
@@ -77,6 +76,10 @@ contract ObjetsMagiques{
     mapping (uint256 => bool) public existence;
     
     event Transfer(address indexed _from, address indexed _to, uint256 _tokenId);
+
+    function accessPoss(uint256 obj, address poss) public {
+        possesseurs[obj] = poss;
+    }
 
     function balanceOf(address _owner) public view returns (uint256 balance){
         return _owner.balance;
